@@ -1,7 +1,7 @@
 This is a [Node.js](https://nodejs.org/) project 
 
 ## Getting Started
-First, clone the repository: 
+First, clone the repository at: https://github.com/Egovictorc/lanister-pay 
 
 ## install the dependencies:
 ```bash
