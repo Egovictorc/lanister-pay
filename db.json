@@ -1,0 +1,49 @@
+{
+  "feeConfig": {
+    "LNPY1221": {
+      "id": "LNPY1221",
+      "currency": "NGN",
+      "locale": "*",
+      "entity": "*",
+      "entityProp": "*",
+      "type": "PERC",
+      "value": "1.4"
+    },
+    "LNPY1222": {
+      "id": "LNPY1222",
+      "currency": "NGN",
+      "locale": "INTL",
+      "entity": "CREDIT-CARD",
+      "entityProp": "VISA",
+      "type": "PERC",
+      "value": "5.0"
+    },
+    "LNPY1223": {
+      "id": "LNPY1223",
+      "currency": "NGN",
+      "locale": "LOCL",
+      "entity": "CREDIT-CARD",
+      "entityProp": "*",
+      "type": "FLAT_PERC",
+      "value": "50:1.4"
+    },
+    "LNPY1224": {
+      "id": "LNPY1224",
+      "currency": "NGN",
+      "locale": "*",
+      "entity": "BANK-ACCOUNT",
+      "entityProp": "*",
+      "type": "FLAT",
+      "value": "100"
+    },
+    "LNPY1225": {
+      "id": "LNPY1225",
+      "currency": "NGN",
+      "locale": "*",
+      "entity": "USSD",
+      "entityProp": "MTN",
+      "type": "PERC",
+      "value": "0.55"
+    }
+  }
+}

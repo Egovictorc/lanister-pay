@@ -1,0 +1,39 @@
+// request
+{
+    "ID": 91204,
+    "Amount": 3500,
+    "Currency": "USD",
+    "CurrencyCountry": "US",
+    "Customer": {
+        "ID": 4211232,
+        "EmailAddress": "anonimized292200@anon.io",
+        "FullName": "Wenthorth Scoffield",
+        "BearsFee": false
+    },
+    "PaymentEntity": {
+        "ID": 2203454,
+        "Issuer": "WINTERFELLWALLETS",
+        "Brand": "",
+        "Number": "AX0923******0293",
+        "SixID": "AX0923",
+        "Type": "WALLET-ID",
+        "Country": "NG"
+    }
+}
+
+// Expected Response
+HTTP ANYTHING OTHER THAN 200 ERROR
+{
+  "Error": "No fee configuration for USD transactions."
+}
+
+// Response Explanation
+Using the example FCS shared
+
+LNPY1221 NGN * *(*) : APPLY PERC 1.4
+LNPY1222 NGN INTL CREDIT-CARD(VISA) : APPLY PERC 5.0
+LNPY1223 NGN LOCL CREDIT-CARD(*) : APPLY FLAT_PERC 50:1.4
+LNPY1224 NGN * BANK-ACCOUNT(*) : APPLY FLAT 100
+LNPY1225 NGN * USSD(MTN) : APPLY PERC 0.55
+
+None of the configurations is applicable to the transaction because none's set for currency USD. For cases like this, the HTTP status code for your response should be anything other than 200. The body of the response can be anything you like (so long as it's properly formatted).

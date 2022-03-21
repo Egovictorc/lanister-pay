@@ -1,0 +1,50 @@
+// request
+{
+    "ID": 91203,
+    "Amount": 5000,
+    "Currency": "NGN",
+    "CurrencyCountry": "NG",
+    "Customer": {
+        "ID": 2211232,
+        "EmailAddress": "anonimized29900@anon.io",
+        "FullName": "Abel Eden",
+        "BearsFee": true
+    },
+    "PaymentEntity": {
+        "ID": 2203454,
+        "Issuer": "GTBANK",
+        "Brand": "MASTERCARD",
+        "Number": "530191******2903",
+        "SixID": 530191,
+        "Type": "CREDIT-CARD",
+        "Country": "NG"
+    }
+}
+
+
+// expected response
+HTTP 200 OK
+{
+    "AppliedFeeID": "LNPY1223",
+    "AppliedFeeValue": 120,
+    "ChargeAmount": 5120,
+    "SettlementAmount": 5000
+}
+
+// response explanation
+LNPY1221 NGN * *(*) : APPLY PERC 1.4
+LNPY1222 NGN INTL CREDIT-CARD(VISA) : APPLY PERC 5.0
+LNPY1223 NGN LOCL CREDIT-CARD(*) : APPLY FLAT_PERC 50:1.4
+LNPY1224 NGN * BANK-ACCOUNT(*) : APPLY FLAT 100
+LNPY1225 NGN * USSD(MTN) : APPLY PERC 0.55
+
+Only two of the configurations above are applicable to the transaction data passed.
+
+LNPY1221 NGN * *(*) : APPLY PERC 1.4
+LNPY1223 NGN LOCL CREDIT-CARD(*) : APPLY FLAT_PERC 50:1.4
+
+LNPY1221 is applicable because it applies to NGN transactions for all locales and payment types.
+
+LNPY1223 is applicable because the transaction's a local one (the currencyCountry is NG and the payment entity's country is also NG - see explanation under the specification keyword section for more details on this).
+
+The reason LNPY1223 was applied is because it's more specific than LNPY1221

@@ -1,0 +1,51 @@
+request
+{
+    "ID": 91204,
+    "Amount": 3500,
+    "Currency": "NGN",
+    "CurrencyCountry": "NG",
+    "Customer": {
+        "ID": 4211232,
+        "EmailAddress": "anonimized292200@anon.io",
+        "FullName": "Wenthorth Scoffield",
+        "BearsFee": false
+    },
+    "PaymentEntity": {
+        "ID": 2203454,
+        "Issuer": "AIRTEL",
+        "Brand": "",
+        "Number": "080234******2903",
+        "SixID": 080234,
+        "Type": "USSD",
+        "Country": "NG"
+    }
+}
+
+expected response
+HTTP 200 OK
+{
+    "AppliedFeeID": "LNPY1221",
+    "AppliedFeeValue": 49,
+    "ChargeAmount": 3500,
+    "SettlementAmount": 3451
+}
+
+response explanation
+
+LNPY1221 NGN * *(*) : APPLY PERC 1.4
+LNPY1222 NGN INTL CREDIT-CARD(VISA) : APPLY PERC 5.0
+LNPY1223 NGN LOCL CREDIT-CARD(*) : APPLY FLAT_PERC 50:1.4
+LNPY1224 NGN * BANK-ACCOUNT(*) : APPLY FLAT 100
+LNPY1225 NGN * USSD(MTN) : APPLY PERC 0.55
+
+Only one of the configurations above is applicable to the transaction data passed.
+
+LNPY1221 NGN * *(*) : APPLY PERC 1.4
+
+LNPY1221 is applicable because it applies to NGN transactions for all locales and payment types (In this case, USSD).
+
+LNPY1225 would have been applicable if it's set this way (i.e having AIRTEL or * as the entity as opposed to MTN)
+
+LNPY1225 NGN * USSD(AIRTEL) : APPLY PERC 0.55
+OR
+LNPY1225 NGN * USSD(*) : APPLY PERC 0.55
